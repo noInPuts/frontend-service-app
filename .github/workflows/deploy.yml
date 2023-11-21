@@ -26,10 +26,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push integration service
+      - name: Build and push frontend app
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile  # Update this path if your Dockerfile is in a different location
+          file: ./DockerfileProd
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/webpage:${{ steps.get-version.outputs.version }}
