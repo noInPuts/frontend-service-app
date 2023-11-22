@@ -5,11 +5,47 @@ import Popover from 'react-bootstrap/Popover'
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Form from 'react-bootstrap/Form';
-import Badge from 'react-bootstrap/Badge';
 
+export default function NavBar({ isLoggedIn } : { isLoggedIn : Boolean }) {
 
-export default function NavBar() {
+    function GetNavbarBasedByLogin() {
+        if(isLoggedIn) {
+            return <Nav.Link href="#">My Account</Nav.Link>;
+        }
+        return <>{['bottom'].map((placement) => (
+            <OverlayTrigger
+                trigger="click"
+                key={placement}
+                placement={'bottom'}
+                overlay={
+                    <Popover id={`popover-positioned-${placement}`}>
+                        <Popover.Header as="h3">{`Login`}</Popover.Header>
+                        <Popover.Body>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Username</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter username" />
+                                </Form.Group>
 
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Enter password" />
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    Login
+                                </Button>
+                                <Button variant="primary" type="submit" href="/create_user">
+                                    Opret bruger
+                                </Button>
+                            </Form>
+                        </Popover.Body>
+                    </Popover>
+                }
+            >
+                <Button variant="secondary">Login</Button>
+            </OverlayTrigger>
+        ))}</>;
+    }
 
     return (
         <>
@@ -28,44 +64,11 @@ export default function NavBar() {
                             <Nav.Link href="#">Burger</Nav.Link>
                             <Nav.Link href="#">Sushi</Nav.Link>
                         </Nav>
-
-                        <Nav className="me-auto navbar-right">
-                            {['bottom'].map((placement) => (
-                                <OverlayTrigger
-                                    trigger="click"
-                                    key={placement}
-                                    placement={'bottom'}
-                                    overlay={
-                                        <Popover id={`popover-positioned-${placement}`}>
-                                            <Popover.Header as="h3">{`Login`}</Popover.Header>
-                                            <Popover.Body>
-                                                <Form>
-                                                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                        <Form.Label>Email address</Form.Label>
-                                                        <Form.Control type="email" placeholder="Enter email" />
-                                                    </Form.Group>
-
-                                                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                                                        <Form.Label>Password</Form.Label>
-                                                        <Form.Control type="password" placeholder="Password" />
-                                                    </Form.Group>
-                                                    <Button variant="primary" type="submit">
-                                                        Login
-                                                    </Button>
-                                                    <Button variant="primary" type="submit" href="/create_user">
-                                                        Opret bruger
-                                                    </Button>
-                                                </Form>
-                                            </Popover.Body>
-                                        </Popover>
-                                    }
-                                >
-                                    <Button variant="secondary">login</Button>
-                                </OverlayTrigger>
-                            ))}
-                            <Nav.Link href="#">My Account</Nav.Link>
-
-
+                       
+                        <Nav className='ms-auto'>
+                            <GetNavbarBasedByLogin />
+                            
+                            {/* 
                             {['bottom'].map((placement) => (
                                 <OverlayTrigger
                                     trigger="click"
@@ -110,9 +113,7 @@ export default function NavBar() {
                                 >
                                     <Button variant="secondary">cart <Badge pill bg="danger">9</Badge></Button>
                                 </OverlayTrigger>
-                            ))}
-
-
+                            ))} */}
 
                         </Nav>
                     </Navbar.Collapse>

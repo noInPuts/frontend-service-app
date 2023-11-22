@@ -7,11 +7,29 @@ import CartPage from './pages/cart'
 import AdminLoginPage from './pages/Admin_login'
 import ResturantLoginPage from './pages/Resturant_login'
 import AccountPage from './pages/Account'
+import { useEffect, useState } from 'react'
+import Cookies from "js-cookie"
 
 export default function App() {
+
+  // Variable holding login status
+  const [loggedIn, setLoggedIn] = useState<Boolean>(false);
+
+  // Check if user is logged in (Runs on page load)
+  useEffect(() => {
+    if(Cookies.get("jwt-token") != undefined) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+
+    console.log("Running login check")
+
+  }, []);
+
   return (
     <>
-      <NavBar />
+      <NavBar isLoggedIn={loggedIn}/>
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/create_user" element={<CreateUser />} />
