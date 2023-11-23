@@ -1,0 +1,20 @@
+#header-banner {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#sign-up {
+    margin-top: 10px;
+}
+
+#sign-in-trigger {
+    color: white;
+}
+
+#sign-in-popup-body {
+    padding-bottom: 0px;
+}
+
+.error-outline {
+    border-color: red !important;
+}

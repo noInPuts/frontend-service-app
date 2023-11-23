@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import FrontPage from './pages/frontpage'
-import NavBar from './components/navbar'
+import Header from './components/navbar/Header'
 import CreateUser from './pages/create_user'
 import RestaurantMenu from './pages/Resturant_menu'
 import CartPage from './pages/cart'
@@ -16,20 +16,18 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState<Boolean>(false);
 
   // Check if user is logged in (Runs on page load)
+  // TODO: Extra verify?
   useEffect(() => {
-    if(Cookies.get("jwt-token") != undefined) {
+    if(Cookies.get("jwt-token") !== undefined) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
     }
-
-    console.log("Running login check")
-
   }, []);
 
   return (
     <>
-      <NavBar isLoggedIn={loggedIn}/>
+      <Header isLoggedIn={loggedIn}/>
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/create_user" element={<CreateUser />} />

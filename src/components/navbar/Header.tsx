@@ -5,10 +5,15 @@ import Popover from 'react-bootstrap/Popover'
 import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Form from 'react-bootstrap/Form';
+import './Header.css';
+import { backendUrl } from '../../config/config'
+import { useState } from 'react';
 
-export default function NavBar({ isLoggedIn } : { isLoggedIn : Boolean }) {
+export default function Header({ isLoggedIn } : { isLoggedIn : Boolean }) {
+    
+    const [badLoginAttempt, setBadLoginAttempt] = useState<Boolean>(false);
 
-    function GetNavbarBasedByLogin() {
+    const GetNavbarBasedByLogin = () => {
         if(isLoggedIn) {
             return <Nav.Link href="#">My Account</Nav.Link>;
         }
@@ -19,37 +24,79 @@ export default function NavBar({ isLoggedIn } : { isLoggedIn : Boolean }) {
                 placement={'bottom'}
                 overlay={
                     <Popover id={`popover-positioned-${placement}`}>
-                        <Popover.Header as="h3">{`Login`}</Popover.Header>
-                        <Popover.Body>
-                            <Form>
+                        <Popover.Header as="h3">{`Sign in`}</Popover.Header>
+                        <Popover.Body id="sign-in-popup-body">
+                            <Form onSubmit={login}>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Username</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter username" />
+                                    <Form.Control name="username" type="text" placeholder="Enter username" className={badLoginAttempt ? 'error-outline' : ''} required/>
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Enter password" />
+                                    <Form.Control name="password" type="password" placeholder="Enter password" className={badLoginAttempt ? 'error-outline' : ''}  required/>
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
-                                    Login
+                                    Sign in
                                 </Button>
-                                <Button variant="primary" type="submit" href="/create_user">
-                                    Opret bruger
-                                </Button>
+                                <p id='sign-up'>Don't have a user? <a href="/create_user">Sign up here!</a></p>
                             </Form>
                         </Popover.Body>
                     </Popover>
                 }
             >
-                <Button variant="secondary">Login</Button>
+                <Nav.Link id="sign-in-trigger">Sign in</Nav.Link>
             </OverlayTrigger>
         ))}</>;
     }
 
+    const login = async (event:React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        
+        const formData = new FormData(event.currentTarget);
+        
+        const requestBody = {
+            username : formData.get("username"),
+            password : formData.get("password")
+        }
+
+        try {
+            const response = await fetch(backendUrl + ':8086/user/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              credentials: "include",
+              body: JSON.stringify(requestBody),
+            });
+      
+            if (response.ok) {
+                
+                const headers = response.headers;
+
+                const cookies = headers.get('set-cookie');
+
+                if (cookies) {
+                  console.log('Cookies found in the response:', cookies);
+                  // You can process or manipulate the cookies here
+                } else {
+                  console.log('No cookies found in the response.');
+                }
+            
+              //const data = await response.json();
+              window.location.reload()
+            } else {
+                setBadLoginAttempt(true)
+                alert("Wrong credentials!")
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+    }
+
     return (
         <>
-            <div className="jumbotron">
+            <div className="jumbotron" id='header-banner'>
                 <div className="container text-center">
                     <h1>MTOGO</h1>
                 </div>
@@ -67,7 +114,6 @@ export default function NavBar({ isLoggedIn } : { isLoggedIn : Boolean }) {
                        
                         <Nav className='ms-auto'>
                             <GetNavbarBasedByLogin />
-                            
                             {/* 
                             {['bottom'].map((placement) => (
                                 <OverlayTrigger
@@ -114,7 +160,6 @@ export default function NavBar({ isLoggedIn } : { isLoggedIn : Boolean }) {
                                     <Button variant="secondary">cart <Badge pill bg="danger">9</Badge></Button>
                                 </OverlayTrigger>
                             ))} */}
-
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
