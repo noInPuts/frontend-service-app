@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import FrontPage from './pages/frontpage'
 import Header from './components/navbar/Header'
-import CreateUser from './pages/create_user'
+import CreateUser from './pages/create_user/create_user'
 import RestaurantMenu from './pages/Resturant_menu'
 import CartPage from './pages/cart'
 import AdminLoginPage from './pages/Admin_login'
