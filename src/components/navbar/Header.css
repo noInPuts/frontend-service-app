@@ -7,8 +7,8 @@
     margin-top: 10px;
 }
 
-#sign-in-trigger {
-    color: white;
+.nav-account {
+    color: white !important;
 }
 
 #sign-in-popup-body {

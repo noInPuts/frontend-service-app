@@ -13,9 +13,42 @@ export default function Header({ isLoggedIn } : { isLoggedIn : Boolean }) {
     
     const [badLoginAttempt, setBadLoginAttempt] = useState<Boolean>(false);
 
+    const logout = async () => {
+        try {
+            const response = await fetch(`${backendUrl}:8086/user/logout`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              credentials: "include",
+            });
+      
+            if (response.ok) {
+              window.location.reload()
+            } 
+          } catch (error) {
+            console.error('Error:', error);
+          }
+    }
+
     const GetNavbarBasedByLogin = () => {
         if(isLoggedIn) {
-            return <Nav.Link href="#">My Account</Nav.Link>;
+            return <>{['bottom'].map((placement) => (
+                <OverlayTrigger
+                    trigger="click"
+                    key={placement}
+                    placement={'bottom'}
+                    overlay={
+                        <Popover id={`popover-positioned-${placement}`}>
+                            <Popover.Body>
+                                <Button onClick={logout} className='bg-danger'>Log out</Button>
+                            </Popover.Body>
+                        </Popover>
+                    }
+                >
+                    <Nav.Link className="nav-account">My Account</Nav.Link>
+                </OverlayTrigger>
+            ))}</>;
         }
         return <>{['bottom'].map((placement) => (
             <OverlayTrigger
@@ -45,7 +78,7 @@ export default function Header({ isLoggedIn } : { isLoggedIn : Boolean }) {
                     </Popover>
                 }
             >
-                <Nav.Link id="sign-in-trigger">Sign in</Nav.Link>
+                <Nav.Link className="nav-account">Sign in</Nav.Link>
             </OverlayTrigger>
         ))}</>;
     }
@@ -71,11 +104,8 @@ export default function Header({ isLoggedIn } : { isLoggedIn : Boolean }) {
             });
       
             if (response.ok) {
-                
                 const headers = response.headers;
-
                 const cookies = headers.get('set-cookie');
-
                 if (cookies) {
                   console.log('Cookies found in the response:', cookies);
                   // You can process or manipulate the cookies here
