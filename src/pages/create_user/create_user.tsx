@@ -20,7 +20,7 @@ export default function CreateUser() {
             body: JSON.stringify(requestBody)
         };
 
-        const response = await fetch(`${backendUrl}:8086/user/create`, requestOptions)
+        const response = await fetch(`${backendUrl}:8086/api/user/create`, requestOptions)
 
     
         if (response.ok) {
