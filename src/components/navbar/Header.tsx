@@ -15,7 +15,7 @@ export default function Header({ isLoggedIn } : { isLoggedIn : Boolean }) {
 
     const logout = async () => {
         try {
-            const response = await fetch(`${backendUrl}:8086/user/logout`, {
+            const response = await fetch(`${backendUrl}:8086/api/user/logout`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ export default function Header({ isLoggedIn } : { isLoggedIn : Boolean }) {
         }
 
         try {
-            const response = await fetch(`${backendUrl}:8086/user/login`, {
+            const response = await fetch(`${backendUrl}:8086/api/user/login`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
