@@ -19,7 +19,7 @@ export default function App() {
   // Check if user is logged in (Runs on page load)
   // TODO: Extra verify?
   useEffect(() => {
-    if(Cookies.get("jwt-token") !== undefined) {
+    if(Cookies.get("login-status") !== undefined) {
       setLoggedIn(true);
     } else {
       setLoggedIn(false);
