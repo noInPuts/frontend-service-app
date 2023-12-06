@@ -3,6 +3,7 @@ import Badge from "react-bootstrap/Badge"
 import { backendResturant } from "../config/configResturant";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 export default function FrontPage() {
     /*useEffect(() => {
         console.log("fetching data");
@@ -33,8 +34,7 @@ export default function FrontPage() {
                 {Resturant.map(data => {
                     return (
                         <div key={data.id}>
-                            <a href="/Resturant_menu">
-
+                            <Link to={`/Resturant_menu?id=${data.id}`}>
                                 <div className="col-sm-8 text-left">
                                     <h1>{data.name}</h1>
                                     <div className="row">
@@ -54,7 +54,7 @@ export default function FrontPage() {
 
 
 
-                            </a> </div>)
+                            </Link> </div>)
                 })}
             </Container >
         </>
