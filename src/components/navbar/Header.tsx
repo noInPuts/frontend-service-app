@@ -69,7 +69,7 @@ export default function Header({ isLoggedIn } : { isLoggedIn : Boolean }) {
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control name="password" type="password" placeholder="Enter password" className={badLoginAttempt ? 'error-outline' : ''}  required/>
                                 </Form.Group>
-                                <Button variant="primary" type="submit">
+                                <Button variant="primary" type="submit" name="signInButton">
                                     Sign in
                                 </Button>
                                 <p id='sign-up'>Don't have a user? <a href="/create_user">Sign up here!</a></p>
