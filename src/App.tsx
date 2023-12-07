@@ -10,6 +10,7 @@ import AccountPage from './pages/Account'
 import { useEffect, useState } from 'react'
 import Cookies from "js-cookie"
 import Footer from './components/footer/Footer'
+import { ShoppingCartProvider } from './components/ShoppingCartContext'
 
 export default function App() {
 
@@ -29,6 +30,7 @@ export default function App() {
   return (
     <>
       <Header isLoggedIn={loggedIn}/>
+      <ShoppingCartProvider>
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/create_user" element={<CreateUser />} />
@@ -40,6 +42,7 @@ export default function App() {
         <Route path='/Resurant_login' element={<ResturantLoginPage/>} />
       </Routes>
       <Footer />
+      </ShoppingCartProvider>
     </>
   )
 }

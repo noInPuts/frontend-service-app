@@ -2,12 +2,15 @@ import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button"
 import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useShoppingCart } from "../components/ShoppingCartContext";
+import { FoodItemMenu } from "../components/FoodItemMenu";
 
 export default function RestaurantMenu(props: any) {
     const [searchParams, setSearchParams] = useSearchParams();
     const resturantId = searchParams.get("id");
     console.log(resturantId);
     const [FoodItem, setFoodItems] = useState<any[]>([]);
+
     useEffect(() => {
 
         FoodItems()
@@ -29,6 +32,8 @@ export default function RestaurantMenu(props: any) {
 
     }, [FoodItem]);
 
+
+
     return (
         <>
             <Container>
@@ -39,19 +44,8 @@ export default function RestaurantMenu(props: any) {
 
                         {FoodItem.map((data, key) => {
                             return (
-                                <div className="col-sm-8 text-left" key={data.id}>
-                                    <h1>nr {data.id} {data.name}</h1>
-                                    <div className="row">
-                                        <div className="col-sm-8">
-                                            <p>{data.price} kr</p>
-                                        </div>
-                                        <div className="col-sm-2">
-                                            <Button>add to cart</Button>
-
-                                        </div>
-                                    </div><hr></hr>
-
-                                </div>)
+                                <FoodItemMenu {... data}></FoodItemMenu>
+)
                         })}
                     </div>
                 </div>
