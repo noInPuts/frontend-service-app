@@ -29,8 +29,8 @@ export default function App() {
 
   return (
     <>
+          <ShoppingCartProvider>
       <Header isLoggedIn={loggedIn}/>
-      <ShoppingCartProvider>
       <Routes>
         <Route path="/" element={<FrontPage />} />
         <Route path="/create_user" element={<CreateUser />} />

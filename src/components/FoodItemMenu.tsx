@@ -18,11 +18,11 @@ export function FoodItemMenu({id, name, price}: FoodItemProps) {
                                             <p>{price} kr</p>
                                         </div>
                                         <div className="col-sm-2">
-                                            {quantity === 0 ? (<Button onClick={()=> increaseItemQuentity(id)}>add to cart</Button>) : 
+                                            {quantity === 0 ? (<Button onClick={()=> increaseItemQuentity(id, name, price)}>add to cart</Button>) : 
                                             <div className="d-flex align-items-center flex-column">
                                                <Button onClick={()=> decreaseItemQuentity(id)}> - </Button>
                                                <div> <span>{quantity}</span> in cart</div>
-                                               <Button onClick={()=> increaseItemQuentity(id)}> + </Button>
+                                               <Button onClick={()=> increaseItemQuentity(id, name, price)}> + </Button>
                                                 </div>}
         
                                         </div>
