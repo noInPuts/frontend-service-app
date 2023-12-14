@@ -177,18 +177,6 @@
         ["css=path", "css:finder"]
       ],
       "value": ""
-    }, {
-      "id": "8318514f-aabe-4ca6-8383-27dc1baf8082",
-      "comment": "",
-      "command": "click",
-      "target": "css=.btn:nth-child(1)",
-      "targets": [
-        ["css=.btn:nth-child(1)", "css:finder"],
-        ["xpath=(//button[@type='button'])[4]", "xpath:attributes"],
-        ["xpath=//div[2]/div/button", "xpath:position"],
-        ["xpath=//button[contains(.,'-')]", "xpath:innerText"]
-      ],
-      "value": ""
     }]
   }],
   "suites": [{
