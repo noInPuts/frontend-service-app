@@ -4,6 +4,7 @@ import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEf
 import { useSearchParams } from "react-router-dom";
 import { useShoppingCart } from "../components/ShoppingCartContext";
 import { FoodItemMenu } from "../components/FoodItemMenu";
+import { backendResturant } from "../config/configResturant";
 
 export default function RestaurantMenu(props: any) {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -18,7 +19,7 @@ export default function RestaurantMenu(props: any) {
     }, []);
 
     const FoodItems = () => {
-        fetch("http://localhost:8083/restaurants/" + resturantId)
+        fetch(`${backendResturant}restaurants/` + resturantId)
             .then((response) => response.json())
             .then((text) => setFoodItems(text.menu))
             .catch((error) => console.error('Fetch error:', error));

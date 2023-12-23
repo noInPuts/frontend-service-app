@@ -1,9 +1,10 @@
 import Container from "react-bootstrap/Container"
 import Badge from "react-bootstrap/Badge"
-import { backendResturant } from "../config/configResturant";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { backendResturant } from "../config/configResturant";
+
 export default function FrontPage() {
     /*useEffect(() => {
         console.log("fetching data");
@@ -20,7 +21,7 @@ export default function FrontPage() {
     }, []);
 
     const Resturants = async () => {
-        const response = await fetch("http://localhost:8083/restaurants");
+        const response = await fetch(`${backendResturant}restaurants/`);
 
         setResturants(await response.json())
     }
