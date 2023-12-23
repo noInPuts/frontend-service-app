@@ -1,7 +1,9 @@
 FROM node:21-alpine
 
-ARG REACT_APP_BACKEND_URL=https://mtogo.live/api/
-ENV REACT_APP_BACKEND_URL=https://mtogo.live/api/
+ARG REACT_APP_BACKEND_URL=https://mtogo.live/api/auth
+ENV REACT_APP_BACKEND_URL=https://mtogo.live/api/auth
+ARG REACT_APP_RESTAURANT_SERVICE_URL=https://mtogo.live/api/restaurant
+ENV REACT_APP_RESTAURANT_SERVICE_URL=https://mtogo.live/api/restaurant
 
 WORKDIR /app
 
