@@ -21,7 +21,7 @@ export default function FrontPage() {
     }, []);
 
     const Resturants = async () => {
-        const response = await fetch(`${backendResturant}restaurants/`);
+        const response = await fetch(`${backendResturant}restaurants`);
 
         setResturants(await response.json())
     }
