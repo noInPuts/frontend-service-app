@@ -4,6 +4,8 @@ ARG REACT_APP_BACKEND_URL=https://mtogo.live/api/auth/
 ENV REACT_APP_BACKEND_URL=https://mtogo.live/api/auth/
 ARG REACT_APP_RESTAURANT_SERVICE_URL=https://mtogo.live/api/restaurant/
 ENV REACT_APP_RESTAURANT_SERVICE_URL=https://mtogo.live/api/restaurant/
+ARG REACT_APP_ORDER_SERVICE_URL=https://mtogo.live/api/order
+ENV REACT_APP_ORDER_SERVICE_URL=https://mtogo.live/api/order
 
 WORKDIR /app
 
