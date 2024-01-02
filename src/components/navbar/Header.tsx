@@ -8,9 +8,7 @@ import Form from 'react-bootstrap/Form';
 import './Header.css';
 import { backendUrl } from '../../config/config'
 import { useState } from 'react';
-import { Offcanvas, Stack } from 'react-bootstrap';
 import { useShoppingCart } from '../ShoppingCartContext';
-import { CartItem } from '../CartItem';
 
 export default function Header({ isLoggedIn } : { isLoggedIn : Boolean }) {
 
@@ -151,8 +149,8 @@ export default function Header({ isLoggedIn } : { isLoggedIn : Boolean }) {
                             {cartQuantity > 0 && (    
           <Button
             onClick={openCart}
-            style={{ width: "3rem", height: "3rem", position: "relative" }}
-            variant="outline-primary"
+            style={{ width: "2.5rem", height: "2.5rem", position: "relative" }}
+            variant="outline-light"
             className="rounded-circle"
           >
             <svg

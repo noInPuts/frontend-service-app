@@ -1,21 +1,16 @@
 import Container from "react-bootstrap/Container"
-import Button from "react-bootstrap/Button"
-import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useShoppingCart } from "../components/ShoppingCartContext";
 import { FoodItemMenu } from "../components/FoodItemMenu";
 import { backendResturant } from "../config/configResturant";
 
 export default function RestaurantMenu(props: any) {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const resturantId = searchParams.get("id");
-    console.log(resturantId);
     const [FoodItem, setFoodItems] = useState<any[]>([]);
 
     useEffect(() => {
-
         FoodItems()
-
     }, []);
 
     const FoodItems = () => {
@@ -23,17 +18,7 @@ export default function RestaurantMenu(props: any) {
             .then((response) => response.json())
             .then((text) => setFoodItems(text.menu))
             .catch((error) => console.error('Fetch error:', error));
-
-
     }
-
-    useEffect(() => {
-
-        console.log(FoodItem);
-
-    }, [FoodItem]);
-
-
 
     return (
         <>
@@ -41,11 +26,9 @@ export default function RestaurantMenu(props: any) {
                 <div className="container-fluid">
                     <div className="row content">
                         
-
-
                         {FoodItem.map((data, key) => {
                             return (
-                                <FoodItemMenu {... data}></FoodItemMenu>
+                                <FoodItemMenu {... data} restaurantId={resturantId}></FoodItemMenu>
 )
                         })}
                     </div>

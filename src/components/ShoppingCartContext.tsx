@@ -15,17 +15,19 @@ type CartItem = {
     name: string;
     price: number;
     quentity: number;
+    restaurantId: number;
 }
 
 type ShoppingCartContext = {
     openCart: () => void
     closeCart: () => void
     getItemQuentity: (id: number) => number;
-    increaseItemQuentity: (id: number, name: string, price:number) => void;
+    increaseItemQuentity: (id: number, name: string, price:number, restaurantId:number) => void;
     decreaseItemQuentity: (id: number) => void;
     removeItem: (id: number) => void;
     cartQuantity: number;
     cartItems: CartItem[];
+    emptyCart: () => void
 }
 
 
@@ -50,10 +52,15 @@ export function ShoppingCartProvider({ children }: shoppingCartProviderProps) {
         return cartItems.find((item: { id: number }) => item.id === id)?.quentity ?? 0;
     }
 
-    function increaseItemQuentity(id: number, name: string , price: number) {
+    function increaseItemQuentity(id: number, name: string , price: number, restaurantId: number) {
+        if(cartItems.find(items => items.restaurantId != restaurantId) != null) {
+            alert("You can not add products from different restaurants!")
+            return null;
+        }
+
         setCartItems((currItems) => {
             if (currItems.find(item => item.id === id) == null) {
-                return [...currItems, { id, name: name, price: price, quentity: 1 }];
+                return [...currItems, { id, name: name, price: price, quentity: 1, restaurantId: restaurantId }];
             } else {
                 return currItems.map(item => {
                     if (item.id === id) {
@@ -84,13 +91,15 @@ export function ShoppingCartProvider({ children }: shoppingCartProviderProps) {
         setCartItems((currItems) => currItems.filter(item => item.id !== id));
     }
 
+    function emptyCart() {
+        setCartItems([])
+    }
+
 
     return (
-        <ShoppingCartContext.Provider value={{ getItemQuentity, increaseItemQuentity, decreaseItemQuentity, removeItem, openCart, closeCart, cartItems, cartQuantity }}>
+        <ShoppingCartContext.Provider value={{ getItemQuentity, increaseItemQuentity, decreaseItemQuentity, removeItem, openCart, closeCart, cartItems, cartQuantity, emptyCart }}>
             {children}
             <ShoppingCart isOpen={isOpen} />
         </ShoppingCartContext.Provider>
     )
-
-
 }

@@ -11,6 +11,8 @@ import { useEffect, useState } from 'react'
 import Cookies from "js-cookie"
 import Footer from './components/footer/Footer'
 import { ShoppingCartProvider } from './components/ShoppingCartContext'
+import CreateOrderPage from './pages/create_order/Create_order'
+import Order from './pages/order_page/order'
 
 export default function App() {
 
@@ -38,8 +40,9 @@ export default function App() {
         <Route path="/cart" element={<CartPage/>} />
         <Route path="/account" element={<AccountPage/>} />
         <Route path="/Admin_login" element={<AdminLoginPage/>} />
-
         <Route path='/Resurant_login' element={<ResturantLoginPage/>} />
+        <Route path="/create_order" element={<CreateOrderPage isLoggedIn={loggedIn}/>}   />
+        <Route path="/order" element={<Order isLoggedIn={loggedIn}/>} />
       </Routes>
       <Footer />
       </ShoppingCartProvider>

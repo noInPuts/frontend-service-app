@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Offcanvas, Stack } from "react-bootstrap";
+import { Button, Offcanvas, Stack } from "react-bootstrap";
 import { useShoppingCart } from "./ShoppingCartContext";
 import { CartItem } from "./CartItem";
 
@@ -14,7 +13,7 @@ export function ShoppingCart({isOpen}: ShoppingCartProps) {
     return (
         <Offcanvas show={isOpen} onHide={closeCart} placement="end">
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Shopping Cart</Offcanvas.Title>
+                <Offcanvas.Title>Order Overview</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
             <Stack gap={3}>
@@ -30,6 +29,7 @@ export function ShoppingCart({isOpen}: ShoppingCartProps) {
               }, 0)
             } kr
           </div>
+          <a href="/create_order" className="btn btn-primary"> Pay </a>
         </Stack>
             </Offcanvas.Body>
         </Offcanvas>
